@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class Homepage {
     @RequestMapping(value = "/fmweb", method = RequestMethod.GET)
     public String home(@RequestParam(value = "x", required = false) Integer x,
-                       @RequestParam(value = "y", required = false) Integer y) {
+                       @RequestParam(value = "y", required = false) Integer y,
+                       @RequestParam(value = "button", required = false) Integer button) {
         if (x != null && y != null) {
-            GamePlay.click(x, y);
+            GamePlay.click(x, y, button);
             try {
                 Thread.sleep(1000);
             }catch (Exception e) {

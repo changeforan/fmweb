@@ -5,18 +5,31 @@
     <title>FM Web</title>
     <script>
         /*<![CDATA[*/
-        function refresh(event) {
-            var x = event.clientX;
-            var y = event.clientY;
-            var url = window.location.href.split("?")[0]+"?x="+x+"&y="+y;
+        document.oncontextmenu = function(){return false};
+
+        function play(event) {
+            var e = event || window.event;
+            var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+            var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+            var x = e.pageX || e.clientX + scrollX;
+            var y = e.pageY || e.clientY + scrollY;
+            var url = window.location.href.split("?")[0]+"?x="+x+"&y="+y+"&button="+event.button;
+            window.location.replace(url);
+        }
+
+        function refresh() {
+            var url = window.location.href.split("?")[0];
             window.location.replace(url);
         }
         /*]]>*/
     </script>
 </head>
 <body>
-<div style="width:1366px;height:768px" onclick="refresh(event)">
+<div style="width:1920px;height:1080px" onmouseup="play(event)">
     <img th:src="@{/images/screen.png}" style="width:100%;height:100%;"/>
 </div>
+<button onclick="refresh()">
+    refresh
+</button>
 </body>
 </html>
